@@ -1,0 +1,22 @@
+<app-cell [sudoku]="sudoku" [(activeField)]="activeField"></app-cell>
+
+<div class="options">
+  <button mat-raised-button (click)="erase()">
+    <mat-icon>clear</mat-icon>
+    Erase
+  </button>
+  <button mat-raised-button (click)="noteMode = !noteMode" [color]="noteMode ? 'primary' : undefined">
+    <mat-icon>note</mat-icon>
+    Notes
+  </button>
+</div>
+
+<div class="controls">
+  <button *ngFor="let button of numberButtons"
+          mat-stroked-button
+          color="primary"
+          [disabled]="button.disabled"
+          (click)="insertNumber(button.number)">
+    {{ button.number }}
+  </button>
+</div>

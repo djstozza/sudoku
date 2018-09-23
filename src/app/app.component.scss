@@ -1,0 +1,14 @@
+.sudoku-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.button-container {
+  display: flex;
+
+  .difficulty-button {
+    flex: 1;
+    min-width: 0;
+  }
+}
