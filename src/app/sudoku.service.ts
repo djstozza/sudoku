@@ -57,6 +57,7 @@ export class SudokuService {
     const x = Math.floor(c / 9);
     const y = c % 9;
     const value = puzzle[x][y];
+
     if (puzzle[i][j] === value) return true;
     if (puzzle[i][j] > 0) return false;
     // if not the cell itself, and the mth cell of the group contains the value v, then "no"
