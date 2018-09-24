@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { SudokuService } from './sudoku.service';
 import { Sudoku } from './sudoku/sudoku';
 import { Subscription, timer, switchMap } from 'rxjs';
@@ -30,6 +30,14 @@ export class AppComponent {
     this.generate('moderate');
   }
 
+  @HostListener('window:keydown', ['$event'])
+
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === 'p' && this.elapsedTime) {
+      this.pauseTimer();
+    }
+  }
+
   pauseTimer(): void {
     this.paused = !this.paused;
     if (this.paused) {
@@ -41,7 +49,7 @@ export class AppComponent {
         } else {
           this.elapsedTime;
         }
-      }));
+      });
     }
   }
 
