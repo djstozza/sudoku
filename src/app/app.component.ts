@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SudokuService } from './sudoku.service';
 import { Sudoku } from './sudoku/sudoku';
+import { Subscription, timer, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,10 @@ import { Sudoku } from './sudoku/sudoku';
 export class AppComponent {
   title = 'sudoku';
   sudoku: Sudoku;
+  elapsedTime: number;
+  paused = false;
+
+  private timerSubscription: Subscription;
 
   private difficulties: any = {
     easy: 46,
@@ -23,6 +28,21 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.generate('moderate');
+  }
+
+  pauseTimer(): void {
+    this.paused = !this.paused;
+    if (this.paused) {
+      this.timerSubscription.unsubscribe();
+    } else {
+      this.timerSubscription = timer(0, 1000).subscribe(time => {
+        if (time > 0) {
+          this.elapsedTime += time / time;
+        } else {
+          this.elapsedTime;
+        }
+      }));
+    }
   }
 
   private generate(difficulty): void {
@@ -48,5 +68,17 @@ export class AppComponent {
         readonly: value
       }
     }));
+
+    this.startTimer();
+  }
+
+  private startTimer(): void {
+    if (this.timerSubscription) {
+      this.paused = false;
+      this.elapsedTime = null;
+      this.timerSubscription.unsubscribe();
+    }
+
+    this.timerSubscription = timer(5000, 1000).subscribe(time => this.elapsedTime = time);
   }
 }

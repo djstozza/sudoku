@@ -5,12 +5,14 @@ import { AppComponent } from './app.component';
 import { SudokuComponent } from './sudoku/sudoku.component';
 import { CellComponent } from './cell/cell.component';
 import { MatButtonModule, MatIconModule } from '@angular/material';
+import { FormatTimePipe } from './format-time.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     SudokuComponent,
-    CellComponent
+    CellComponent,
+    FormatTimePipe
   ],
   imports: [
     BrowserModule,

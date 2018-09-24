@@ -19,6 +19,7 @@ export class SudokuService {
         const rows = Array.from(Array(9).keys()).map(() => new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]));
         const columns = Array.from(Array(9).keys()).map(() => new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]));
         const squares = Array.from(Array(9).keys()).map(() => new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]));
+
         Array.from(Array(9).keys()).forEach((i) => {
           Array.from(Array(9).keys()).forEach((j) => {
             const row = rows[i];
@@ -27,7 +28,6 @@ export class SudokuService {
             const choices = [...row].filter(x => column.has(x)).filter(x => square.has(x));
             const choice = this.randomChoice(choices);
             if (!choice) {
-              // eslint-disable-next-line no-throw-literal
               throw 'dead end';
             }
             puzzle[i][j] = choice;
@@ -39,7 +39,6 @@ export class SudokuService {
 
         return puzzle;
       } catch (e) {
-        // eslint-disable-next-line no-continue
         continue;
       }
     }
@@ -72,6 +71,7 @@ export class SudokuService {
 
       const squareX = this.squareX(i, m);
       const squareY = this.squareY(j, m);
+
       if (!(rowPeer.x === x && rowPeer.y === y) && puzzle[rowPeer.x][rowPeer.y] === value) return false;
       if (!(columnPeer.x === x && columnPeer.y === y) && puzzle[columnPeer.x, columnPeer.y] === value) return false;
       if (!(squareX === x && squareY === y) && puzzle[squareX][squareY] === value) return false;
@@ -114,16 +114,20 @@ export class SudokuService {
           x: (Math.floor(Math.floor(cell / 9) / 3) * 3) + Math.floor(i / 3),
           y: ((Math.floor(cell / 9) % 3) * 3) + (i % 3),
         };
+
         if (rowPeer.x !== x) {
           row = this.canBeA(puzzle, rowPeer.x, rowPeer.y, cell);
         }
+
         if (columnPeer.y !== y) {
           column = this.canBeA(puzzle, columnPeer.x, columnPeer.y, cell);
         }
+
         if (squarePeer.x !== x && squarePeer.y !== y) {
           square = this.canBeA(puzzle, squarePeer.x, squarePeer.y, cell);
         }
       });
+
       if (row && column && square) {
         continue;
       } else {
@@ -138,6 +142,7 @@ export class SudokuService {
         cells.delete(cell);
       }
     }
+
     return puzzle;
   }
 }

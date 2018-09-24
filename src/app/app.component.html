@@ -7,5 +7,19 @@
 </div>
 
 <div class="sudoku-container">
-  <app-sudoku [sudoku]="sudoku"></app-sudoku>
+  <div *ngIf="!paused">
+    <app-sudoku [sudoku]="sudoku"></app-sudoku>
+  </div>
+
+  <div *ngIf="paused" class="foo">
+    <h1><mat-icon>pause</mat-icon> Paused</h1>
+  </div>
+
+  <div *ngIf="elapsedTime">
+    <span class="time">{{ elapsedTime | formatTime }}</span>
+    <button mat-raised-button (click)="pauseTimer()">
+      <mat-icon>{{ paused ? 'play_arrow' : 'pause' }}</mat-icon>
+      {{ paused ? 'Resume' : 'Pause' }}
+    </button>
+  </div>
 </div>
