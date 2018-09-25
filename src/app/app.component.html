@@ -1,9 +1,9 @@
 <div class="button-container">
-  <button mat-raised-button mat-stroked-button class="difficulty-button" (click)="generate('easy')">Easy</button>
-  <button mat-raised-button mat-stroked-button class="difficulty-button" (click)="generate('moderate')">Moderate</button>
-  <button mat-raised-button mat-stroked-button class="difficulty-button" (click)="generate('hard')">Hard</button>
-  <button mat-raised-button mat-stroked-button class="difficulty-button" (click)="generate('expert')">Expert</button>
-  <button mat-raised-button mat-stroked-button class="difficulty-button" (click)="generate('insane')">Insane</button>
+  <ng-container *ngFor="let difficulty of difficultiesArr">
+    <button mat-raised-button mat-stroked-button class="difficulty-button" (click)="setDifficulty(difficulty)">
+      {{ difficultyText(difficulty) }}
+    </button>
+  </ng-container>
 </div>
 
 <div class="sudoku-container">
@@ -11,13 +11,13 @@
     <app-sudoku [sudoku]="sudoku"></app-sudoku>
   </div>
 
-  <div *ngIf="paused" class="foo">
+  <div *ngIf="paused" class="paused">
     <h1><mat-icon>pause</mat-icon> Paused</h1>
   </div>
 
   <div *ngIf="elapsedTime">
     <span class="time">{{ elapsedTime | formatTime }}</span>
-    <button mat-raised-button (click)="pauseTimer()">
+    <button mat-raised-button class="pause-button" (click)="pauseTimer()">
       <mat-icon>{{ paused ? 'play_arrow' : 'pause' }}</mat-icon>
       {{ paused ? 'Resume' : 'Pause' }}
     </button>

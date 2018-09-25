@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { SudokuService } from './sudoku.service';
 import { Sudoku } from './sudoku/sudoku';
-import { Subscription, timer, switchMap } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +13,11 @@ export class AppComponent {
   sudoku: Sudoku;
   elapsedTime: number;
   paused = false;
+  private _difficulty: string = 'moderate';
 
   private timerSubscription: Subscription;
 
-  private difficulties: any = {
+  private _difficultiesHash: any = {
     easy: 46,
     moderate: 36,
     hard: 29,
@@ -24,54 +25,62 @@ export class AppComponent {
     insane: 17
   }
 
+  private _difficultiesArr: string[] = Object.keys(this._difficultiesHash);
+
   constructor(private _sudokuService: SudokuService) { }
 
   ngOnInit(): void {
-    this.generate('moderate');
+    this.generate();
   }
 
   @HostListener('window:keydown', ['$event'])
 
-  onKeyDown(event: KeyboardEvent) {
+  private onKeyDown(event: KeyboardEvent) {
     if (event.key === 'p' && this.elapsedTime) {
       this.pauseTimer();
     }
   }
 
-  pauseTimer(): void {
+  public setDifficulty(difficulty): void {
+    if (this._difficultiesArr.indexOf(difficulty) > -1) {
+      this._difficulty = difficulty;
+    } else {
+      this._difficulty = 'moderate';
+    }
+
+    this.generate();
+  }
+
+  public difficultyText(difficulty): string {
+    return difficulty[0].toUpperCase() + difficulty.slice(1);
+  }
+
+  public pauseTimer(): void {
     this.paused = !this.paused;
+
     if (this.paused) {
       this.timerSubscription.unsubscribe();
     } else {
-      this.timerSubscription = timer(0, 1000).subscribe(time => {
-        if (time > 0) {
-          this.elapsedTime += time / time;
-        } else {
-          this.elapsedTime;
-        }
-      });
+      this.timerSubscription = timer(0, 1000).subscribe(time => time > 0 ? this.elapsedTime++ : this.elapsedTime);
     }
   }
 
-  private generate(difficulty): void {
+  private generate(): void {
     const solution = this._sudokuService.makePuzzle();
-    const puzzle = this._sudokuService.pluck(solution, this.difficulties[difficulty]);
+    const puzzle = this._sudokuService.pluck(solution, this._difficultiesHash[this._difficulty]);
 
     this.sudoku = solution.map((row, rowIndex) => row.map((number, colIndex) => {
       const value = puzzle[rowIndex][colIndex];
 
-      const rowRemainder = rowIndex - rowIndex % 3;
-      const columnRemainder = colIndex - colIndex % 3;
-
-      const squareRows = Array.from({ length: 3 }, (x, i) => rowRemainder + i);
-      const squareCols = Array.from({ length: 3 }, (x, i) => columnRemainder + i);
+      const squareRow = Math.floor(rowIndex / 3);
+      const squareCol = Math.floor(colIndex / 3);
+      const squareIndex = squareRow * 3 + squareCol;
 
       return {
         answer: number,
         rowIndex: rowIndex,
         colIndex: colIndex,
-        squareRows: squareRows,
-        squareCols: squareCols,
+        squareIndex: squareIndex,
         value: value,
         readonly: value
       }
@@ -89,4 +98,8 @@ export class AppComponent {
 
     this.timerSubscription = timer(5000, 1000).subscribe(time => this.elapsedTime = time);
   }
+
+  public get difficulty() { return this._difficulty }
+  public get difficultiesHash() { return this._difficultiesHash }
+  public get difficultiesArr() { return this._difficultiesArr }
 }

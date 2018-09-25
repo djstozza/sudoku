@@ -18,13 +18,13 @@ describe('SudokuService', () => {
 
     for (let rowIndex in puzzle) {
       const row = puzzle[rowIndex];
-      const squareRow = Math.floor(rowIndex / 3);
+      const squareRow = Math.floor(parseInt(rowIndex) / 3);
 
       expect(row.length).toBe(9);
 
       for (let colIndex in row) {
         const number = puzzle[rowIndex][colIndex];
-        const squareCol = Math.floor(colIndex / 3);
+        const squareCol = Math.floor(parseInt(colIndex) / 3);
         const squareIndex = squareRow * 3 + squareCol;
 
         columns[colIndex].push(number);
@@ -63,8 +63,8 @@ describe('SudokuService', () => {
     const readOnlyCount = 20;
     const maskedPuzzle = service.pluck(puzzle, readOnlyCount);
 
-    const flattenedPuzzle = puzzle.flat();
-    const flattededMaskedPuzzle = maskedPuzzle.flat();
+    const flattenedPuzzle = JSON.parse(JSON.stringify(puzzle)).flat();
+    const flattededMaskedPuzzle = JSON.parse(JSON.stringify(maskedPuzzle)).flat();
 
     expect(flattededMaskedPuzzle.filter(f => typeof(f) === 'number').length).toBe(readOnlyCount);
 

@@ -8,7 +8,7 @@
        [class.readonly]="field.readonly"
        [class.highlight-row]="rowIndex === activeField?.rowIndex"
        [class.highlight-col]="colIndex === activeField?.colIndex"
-       [class.highlight-square]="activeField?.squareRows.includes(rowIndex) && activeField?.squareCols.includes(colIndex)"
+       [class.highlight-square]="field.squareIndex === activeField?.squareIndex"
        [class.highlight-same]="activeField?.value && activeField.value === field?.value"
        [class.active]="field === activeField"
        [class.conflict]="field.conflict"

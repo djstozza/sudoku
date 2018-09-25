@@ -7,7 +7,6 @@ export interface SudokuField {
   readonly?: boolean;
   rowIndex: number;
   colIndex: number;
-  squareRows: number[];
-  squareCols: number[];
+  squareIndex: number;
   conflict?: boolean;
 }

@@ -44,15 +44,6 @@ export class SudokuService {
     }
   }
 
-  private squareX(i, m): number {
-    return Math.floor(i / 3) * 3 + Math.floor(m / 3);
-  }
-
-  private squareY(j, m): number {
-    return Math.floor(j / 3) * 3 + (m % 3);
-  }
-
-
   private canBeA(puzzle, i, j, c): boolean {
     const x = Math.floor(c / 9);
     const y = c % 9;
@@ -65,17 +56,14 @@ export class SudokuService {
     for (const m in Array.from(Array(9).keys())) {
       const rowPeer = { x: parseInt(m), y: parseInt(j) };
       const columnPeer = { x: parseInt(i), y: parseInt(m) };
-      // const SquarePeer = {
-      //   x: (Math.floor(i / 3) * 3) + Math.floor(m / 3),
-      //   y: (Math.floor(j / 3) * 3) + (m % 3) as number,
-      // };
-
-      const squareX = this.squareX(i, m);
-      const squareY = this.squareY(j, m);
+      const SquarePeer = {
+        x: Math.floor(parseInt(i) / 3) * 3 + Math.floor(parseInt(m) / 3),
+        y: Math.floor(parseInt(j) / 3) * 3 + parseInt(m) % 3,
+      };
 
       if (!(rowPeer.x === x && rowPeer.y === y) && puzzle[rowPeer.x][rowPeer.y] === value) return false;
       if (!(columnPeer.x === x && columnPeer.y === y) && puzzle[columnPeer.x, columnPeer.y] === value) return false;
-      if (!(squareX === x && squareY === y) && puzzle[squareX][squareY] === value) return false;
+      if (!(SquarePeer.x === x && SquarePeer.y === y) && puzzle[SquarePeer.x][SquarePeer.y] === value) return false;
     }
     return true;
   }

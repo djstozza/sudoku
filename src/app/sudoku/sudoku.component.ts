@@ -128,14 +128,17 @@ export class SudokuComponent implements OnChanges {
       field.notes = field.notes ? field.notes.filter(n => n !== this.activeField.value) : [];
     };
 
-    this.sudoku[this.activeField.rowIndex].forEach(field => removeNote(field));
-    this.sudoku.forEach(row => removeNote(row[this.activeField.colIndex]));
+    const inputs = JSON.parse(JSON.stringify(this.sudoku)).flat();
 
+    inputs.forEach(cell => {
+      const field = this.activeField;
+      const removable = (
+        cell.rowIndex === field.rowIndex || cell.colIndex === field.colIndex || cell.squareIndex === field.squareIndex
+      );
 
-    this.activeField.squareRows.forEach(rowIndex => {
-      this.activeField.squareCols.forEach(colIndex => {
-        removeNote(this.sudoku[rowIndex][colIndex]);
-      });
+      if (removable) {
+        removeNote(cell);
+      }
     });
   }
 
@@ -158,18 +161,13 @@ export class SudokuComponent implements OnChanges {
 
   private duplicatesPresent(cell): boolean {
     const inputs = JSON.parse(JSON.stringify(this.sudoku)).flat();
-    const duplicates = inputs.filter(input => (
+    const duplicates = inputs.filter(input => {
       cell.value === input.value && (
-
         cell.rowIndex === input.rowIndex ||
-        cell.colIndex === input.colIndex || (
-            cell.squareRows.toString() == input.squareRows.toString() &&
-            cell.squareCols.toString() == input.squareCols.toString()
-          )
-        )
-      )
-    );
-
+        cell.colIndex === input.colIndex ||
+        cell.squareIndex === input.squareIndex
+      );
+    });
 
     return duplicates.length > 1
   }
