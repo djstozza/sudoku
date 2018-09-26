@@ -162,14 +162,15 @@ export class SudokuComponent implements OnChanges {
   private duplicatesPresent(cell): boolean {
     const inputs = JSON.parse(JSON.stringify(this.sudoku)).flat();
     const duplicates = inputs.filter(input => {
-      cell.value === input.value && (
+      return (
+        cell.value === input.value && (
         cell.rowIndex === input.rowIndex ||
         cell.colIndex === input.colIndex ||
         cell.squareIndex === input.squareIndex
-      );
+      ));
     });
 
-    return duplicates.length > 1
+    return duplicates.length > 1;
   }
 
   private checkConflicts(): void {

@@ -30,10 +30,6 @@ describe('AppComponent', () => {
     compiled = fixture.debugElement.nativeElement;
   });
 
-  it('should create the app', () => {
-    expect(app).toBeTruthy();
-  });
-
   it(`should have as title 'sudoku'`, () => {
     expect(app.title).toEqual('sudoku');
   });
@@ -53,20 +49,49 @@ describe('AppComponent', () => {
 
   it('should render the sudoku board', () => {
     const defaultDifficulty = 'moderate';
-
-    const inputs = JSON.parse(JSON.stringify(app.sudoku)).flat();
-    const cells = compiled.querySelectorAll('.sudoku-container .cell .value');
+    const cells = compiled.querySelectorAll('.sudoku-container .cell');
+    const values = compiled.querySelectorAll('.sudoku-container .cell .value');
 
     expect(app.difficulty).toEqual(defaultDifficulty);
 
-    for (let index in inputs) {
-      const cell = cells[index];
-      const input = inputs[index];
+    for (let rowIndex in app.sudoku) {
+      for (let colIndex in app.sudoku[rowIndex]) {
 
-      expect(cell.textContent).toEqual(`${input.value}`);
+        const index = parseInt(rowIndex) * app.sudoku.length + parseInt(colIndex);
+        const value = values[index];
+        const input = app.sudoku[rowIndex][colIndex];
+        const cell = cells[index];
+
+        expect(input.rowIndex).toEqual(parseInt(rowIndex));
+        expect(input.colIndex).toEqual(parseInt(colIndex));
+
+        const squareIndex = Math.floor(parseInt(rowIndex) / 3) * 3 + Math.floor(parseInt(colIndex) / 3);
+
+        expect(input.squareIndex).toEqual(squareIndex);
+
+        expect(value.textContent).toEqual(`${input.value}`);
+
+        if (parseInt(rowIndex) % 3 === 0) {
+          expect(cell.classList.contains('top')).toBeTruthy();
+        }
+
+        if (parseInt(rowIndex) % 3 === 2) {
+          expect(cell.classList.contains('bottom')).toBeTruthy();
+        }
+
+        if (parseInt(colIndex) % 3 === 0) {
+          expect(cell.classList.contains('left')).toBeTruthy();
+        }
+
+        if (parseInt(colIndex) % 3 === 2) {
+          expect(cell.classList.contains('right')).toBeTruthy();
+        }
+
+        if (typeof(input.value) === 'number') {
+          expect(cell.classList.contains('readonly')).toBeTruthy();
+        }
+      }
     }
-
-    expect(inputs.filter(f => typeof(f.value) === 'number').length).toBe(app.difficultiesHash[defaultDifficulty]);
   });
 
   it('sets the difficutly of the sudoku board', () => {
@@ -108,7 +133,7 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('.pause-button').textContent).toContain('Pause');
   });
 
-  it('hides the sudoku puzzlie when paused and reveals it when resumed', () => {
+  it('hides the sudoku puzzle when paused and reveals it when resumed', () => {
     app.elapsedTime = 5;
     fixture.detectChanges();
 
@@ -116,15 +141,15 @@ describe('AppComponent', () => {
     pauseButton.click();
     fixture.detectChanges();
 
-    expect(app.paused).toEqual(true);
+    expect(app.paused).toBeTruthy();
     expect(compiled.querySelectorAll('.sudoku-container .cell').length).toEqual(0);
     expect(compiled.querySelector('.pause-button').textContent).toContain('Resume');
     expect(compiled.querySelector('.sudoku-container').textContent).toContain('Paused');
 
     pauseButton.click();
     fixture.detectChanges();
-    expect(app.paused).toEqual(false);
-
+    expect(app.paused).toBeFalsy();
+    console.log(app.sudoku)
     const cellCount = JSON.parse(JSON.stringify(app.sudoku)).flat().length;
 
     expect(compiled.querySelectorAll('.sudoku-container .cell').length).toEqual(cellCount);
@@ -135,10 +160,10 @@ describe('AppComponent', () => {
 
     window.dispatchEvent(event);
     fixture.detectChanges();
-    expect(app.paused).toEqual(true);
+    expect(app.paused).toBeTruthy();
 
     window.dispatchEvent(event);
     fixture.detectChanges();
-    expect(app.paused).toEqual(false);
+    expect(app.paused).toBeFalsy();
   });
 });

@@ -1,8 +1,9 @@
 import { FormatTimePipe } from './format-time.pipe';
 
 describe('FormatTimePipe', () => {
-  it('create an instance', () => {
+  it('pipes time into the correct format', () => {
     const pipe = new FormatTimePipe();
-    expect(pipe).toBeTruthy();
+    const seconds = 11700;
+    expect(pipe.transform(seconds)).toEqual('03:15:00');
   });
 });
