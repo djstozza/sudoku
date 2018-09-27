@@ -57,8 +57,8 @@ describe('SudokuComponent', () => {
     }
   });
 
-  it('active cell', () => {
-    const index = Math.floor(Math.random() * cells.length);
+  it('active field', () => {
+    const index = Math.floor(Math.random() * (cells.length - 1));
 
     cells[index].click();
     fixture.detectChanges();
@@ -68,9 +68,8 @@ describe('SudokuComponent', () => {
   it('insert number', () => {
     const cell = compiled.querySelector('.cell:not(.readonly)');
     cell.click();
-    fixture.detectChanges();
-
     button.click();
+
     fixture.detectChanges();
 
     expect(cell.textContent).toEqual(button.textContent.trim());
@@ -88,8 +87,8 @@ describe('SudokuComponent', () => {
     const cell = compiled.querySelectorAll('.cell')[index];
 
     cell.click();
-
     button.click();
+
     fixture.detectChanges();
 
     expect(component.activeField.notes[0]).toEqual(parseInt(button.textContent));
@@ -114,5 +113,88 @@ describe('SudokuComponent', () => {
 
     expect(component.numberButtons.find(f => (f.number === buttonNumber)).disabled).toBeTruthy();
     expect(button.disabled).toBeTruthy();
+  });
+
+  it('erase', () => {
+    const cell = compiled.querySelector('.cell:not(.readonly)');
+
+    cell.click();
+    button.click();
+
+    fixture.detectChanges();
+
+    expect(cell.textContent).toEqual(button.textContent.trim());
+    expect(component.activeField.value).toEqual(parseInt(button.textContent));
+
+    const erase = compiled.querySelector('.erase');
+    erase.click();
+
+    fixture.detectChanges();
+    expect(cell.textContent).toBe('');
+    expect(component.activeField.value).toBe(undefined);
+  });
+
+  describe('keyboard events', () => {
+    let originalActiveField: any = null;
+
+    beforeEach(() => {
+      const index = Math.floor(Math.random() * cells.length);
+
+      cells[index].click();
+      fixture.detectChanges();
+      originalActiveField = component.activeField;
+    });
+
+    it('move left', () => {
+      const event: Event = new KeyboardEvent('keydown', { 'key': 'arrowLeft' });
+      window.dispatchEvent(event);
+
+      fixture.detectChanges();
+
+      if (originalActiveField.colIndex > 0) {
+        expect(component.activeField.colIndex).toEqual(originalActiveField.colIndex - 1);
+      } else {
+        expect(component.activeField).toEqual(originalActiveField);
+      }
+    });
+
+    it('move right', () => {
+      const event: Event = new KeyboardEvent('keydown', { 'key': 'arrowRight' });
+      window.dispatchEvent(event);
+
+      fixture.detectChanges();
+
+      if (originalActiveField.colIndex < component.sudoku.length - 1) {
+        expect(component.activeField.colIndex).toEqual(originalActiveField.colIndex + 1);
+      } else {
+        expect(component.activeField).toEqual(originalActiveField);
+      }
+    });
+
+    it('move up', () => {
+      const event: Event = new KeyboardEvent('keydown', { 'key': 'arrowUp' });
+      window.dispatchEvent(event);
+
+      fixture.detectChanges();
+
+      if (originalActiveField.rowIndex > 0) {
+        expect(component.activeField.rowIndex).toEqual(originalActiveField.rowIndex - 1);
+      } else {
+        expect(component.activeField).toEqual(originalActiveField);
+      }
+    });
+
+    it('move down', () => {
+      const event: Event = new KeyboardEvent('keydown', { 'key': 'arrowDown' });
+      window.dispatchEvent(event);
+
+      fixture.detectChanges();
+
+      if (originalActiveField.rowIndex < component.sudoku.length - 1) {
+        expect(component.activeField.rowIndex).toEqual(originalActiveField.rowIndex + 1);
+      } else {
+        expect(component.activeField).toEqual(originalActiveField);
+      }
+    });
   });
 });

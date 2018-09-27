@@ -157,8 +157,8 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('.sudoku-container').textContent).not.toContain('Paused');
 
     const event: Event = new KeyboardEvent('keydown', { 'key': 'p' });
-
     window.dispatchEvent(event);
+
     fixture.detectChanges();
     expect(app.paused).toBeTruthy();
 
