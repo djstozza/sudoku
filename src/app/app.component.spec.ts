@@ -149,7 +149,7 @@ describe('AppComponent', () => {
     pauseButton.click();
     fixture.detectChanges();
     expect(app.paused).toBeFalsy();
-    console.log(app.sudoku)
+
     const cellCount = JSON.parse(JSON.stringify(app.sudoku)).flat().length;
 
     expect(compiled.querySelectorAll('.sudoku-container .cell').length).toEqual(cellCount);

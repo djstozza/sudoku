@@ -82,7 +82,7 @@ export class AppComponent {
         colIndex: colIndex,
         squareIndex: squareIndex,
         value: value,
-        readonly: value
+        readonly: typeof(value) === "number"
       }
     }));
 
