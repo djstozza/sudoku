@@ -32,7 +32,8 @@ export class CompletionDialogComponent {
   }
 
   createScore(name, difficulty, time) {
-    this.scoreService.createScore(name, difficulty, time).subscribe(() => {
+    this.scoreService.createScore(name, difficulty, time).subscribe((data) => {
+      console.log(data)
     });
   }
 }

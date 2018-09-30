@@ -4,7 +4,7 @@
   "scripts": {
     "server": "nodemon server.js",
     "ng": "ng",
-    "start": "node server.js",
+    "start": "babel-node server.js",
     "postinstall": "ng build --aot --prod",
     "build": "ng build --aot --prod",
     "dev": "babel-watch server.js",
