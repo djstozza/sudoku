@@ -9,6 +9,7 @@ import { NumberButton } from './number-button';
 })
 export class SudokuComponent implements OnChanges {
   @Input() sudoku: Sudoku;
+  @Output() finish = new EventEmitter<void>();
 
   activeField?: SudokuField;
   noteMode = false;
@@ -150,9 +151,9 @@ export class SudokuComponent implements OnChanges {
   }
 
   private checkFinished(): void {
-    // if (this.finished) {
-    //   this.finish.emit();
-    // }
+    if (this.finished) {
+      this.finish.emit();
+    }
   }
 
   private get finished(): boolean {

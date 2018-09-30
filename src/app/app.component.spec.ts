@@ -94,7 +94,7 @@ describe('AppComponent', () => {
     }
   });
 
-  it('sets the difficutly of the sudoku board', () => {
+  it('sets the difficulty of the sudoku board', () => {
     const difficulty = 'insane';
 
     app.setDifficulty(difficulty);
@@ -115,7 +115,7 @@ describe('AppComponent', () => {
     expect(inputs.filter(f => typeof(f.value) === 'number').length).toBe(app.difficultiesHash[difficulty]);
   });
 
-  it('sets the difficutly to moderate if invalid', () => {
+  it('sets the difficulty to moderate if invalid', () => {
     const defaultDifficulty = 'moderate';
 
     app.setDifficulty('foo');

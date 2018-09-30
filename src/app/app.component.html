@@ -8,7 +8,7 @@
 
 <div class="sudoku-container">
   <div *ngIf="!paused">
-    <app-sudoku [sudoku]="sudoku"></app-sudoku>
+    <app-sudoku [sudoku]="sudoku" (finish)="onGameFinished()"></app-sudoku>
   </div>
 
   <div *ngIf="paused" class="paused">

@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const helmet = require('helmet');
+const score = require('./server/routes/score');
 
 const app = express();
 app.use(helmet());
@@ -24,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, 'dist/sudoku'))); // angular project
-// app.use('/api', api)
+app.use('/api', score);
 
 const port = process.env.PORT || 3000;
 

@@ -2,6 +2,8 @@ import { Component, HostListener } from '@angular/core';
 import { SudokuService } from './sudoku.service';
 import { Sudoku } from './sudoku/sudoku';
 import { Subscription, timer } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +20,7 @@ export class AppComponent {
   private timerSubscription: Subscription;
 
   private _difficultiesHash: any = {
-    easy: 46,
+    easy: 80,
     moderate: 36,
     hard: 29,
     expert: 23,
@@ -27,7 +29,7 @@ export class AppComponent {
 
   private _difficultiesArr: string[] = Object.keys(this._difficultiesHash);
 
-  constructor(private _sudokuService: SudokuService) { }
+  constructor(private _sudokuService: SudokuService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.generate();
@@ -96,7 +98,22 @@ export class AppComponent {
       this.timerSubscription.unsubscribe();
     }
 
-    this.timerSubscription = timer(5000, 1000).subscribe(time => this.elapsedTime = time);
+    this.timerSubscription = timer(0, 1000).subscribe(time => this.elapsedTime = time);
+  }
+
+  onGameFinished() {
+    this.timerSubscription.unsubscribe();
+
+    this.dialog
+      .open(
+        CompletionDialogComponent,
+        {
+          disableClose: true,
+          data: { time: this.elapsedTime, difficulty: this.difficulty },
+        }
+      )
+      .afterClosed()
+      .subscribe(() => this.generate());
   }
 
   public get difficulty() { return this._difficulty }
