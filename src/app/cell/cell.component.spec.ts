@@ -3,6 +3,7 @@ import { AppComponent } from '../app.component';
 import { CellComponent } from './cell.component';
 import { FormatTimePipe } from '../format-time.pipe';
 import { SudokuService } from '../sudoku.service';
+import { MatDialog } from '@angular/material';
 
 describe('CellComponent', () => {
   let component: CellComponent;
@@ -23,7 +24,7 @@ describe('CellComponent', () => {
   }));
 
   beforeEach(() => {
-    const app = new AppComponent(new SudokuService());
+    const app = new AppComponent(new SudokuService(), new MatDialog());
     app.setDifficulty('insane');
     fixture = TestBed.createComponent(CellComponent);
     component = fixture.componentInstance;

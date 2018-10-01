@@ -2,7 +2,10 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { SudokuComponent } from './sudoku/sudoku.component';
 import { CellComponent } from './cell/cell.component';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule, MatIconModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { FormatTimePipe } from './format-time.pipe';
 
 describe('AppComponent', () => {
@@ -16,11 +19,15 @@ describe('AppComponent', () => {
         AppComponent,
         SudokuComponent,
         CellComponent,
-        FormatTimePipe
+        FormatTimePipe,
+        CompletionDialogComponent
       ],
       imports: [
         MatButtonModule,
         MatIconModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
       ],
     }).compileComponents();
 
