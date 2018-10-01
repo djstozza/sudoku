@@ -7,7 +7,14 @@ import { AppComponent } from './app.component';
 import { SudokuComponent } from './sudoku/sudoku.component';
 import { CellComponent } from './cell/cell.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatIconModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSnackBarModule
+} from '@angular/material';
 import { FormatTimePipe } from './format-time.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -29,6 +36,7 @@ import { CompletionDialogComponent } from './completion-dialog/completion-dialog
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

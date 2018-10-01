@@ -3,7 +3,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CompletionDialogComponent } from './completion-dialog.component';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { FormatTimePipe } from '../format-time.pipe';
-import { MatButtonModule, MatIconModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSnackBar
+} from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -17,7 +24,8 @@ describe('CompletionDialogComponent', () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        HttpClient
+        HttpClient,
+        MatSnackBar
       ],
       declarations: [CompletionDialogComponent, FormatTimePipe],
       imports: [

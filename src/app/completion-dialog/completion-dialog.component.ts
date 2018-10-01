@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { ScoreService } from '../score.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-completion-dialog',
@@ -19,6 +20,7 @@ export class CompletionDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: any,
+    public snackBar: MatSnackBar,
     private scoreService: ScoreService,
     private fb: FormBuilder,
     // private router: Router
@@ -33,7 +35,7 @@ export class CompletionDialogComponent {
 
   createScore(name, difficulty, time) {
     this.scoreService.createScore(name, difficulty, time).subscribe((data) => {
-      console.log(data)
+      this.snackBar.open(data['score'], 'Close', { duration: 2500 });
     });
   }
 }

@@ -15,6 +15,10 @@ export class ScoreService {
       time: time,
     };
 
-    return this.http.post(`/api/scores`, score);
+    return this.http.post('/api/scores', score);
+  }
+
+  fetchScores() {
+    return this.http.get('/api/scores');
   }
 }
