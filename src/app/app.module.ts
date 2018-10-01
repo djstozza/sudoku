@@ -19,6 +19,8 @@ import { FormatTimePipe } from './format-time.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
+import { GameComponent } from './game/game.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { CompletionDialogComponent } from './completion-dialog/completion-dialog
     SudokuComponent,
     CellComponent,
     FormatTimePipe,
-    CompletionDialogComponent
+    CompletionDialogComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { CompletionDialogComponent } from './completion-dialog/completion-dialog
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    AppRoutingModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

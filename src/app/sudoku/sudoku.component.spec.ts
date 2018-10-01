@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppComponent } from '../app.component';
+import { GameComponent } from '../game/game.component';
 import { SudokuComponent } from './sudoku.component';
 import { CellComponent } from '../cell/cell.component';
 import { FormatTimePipe } from '../format-time.pipe';
@@ -31,13 +31,13 @@ describe('SudokuComponent', () => {
   }));
 
   beforeEach(() => {
-    const app = new AppComponent(new SudokuService());
-    app.setDifficulty('insane');
+    const game = new GameComponent(new SudokuService());
+    game.setDifficulty('insane');
 
     fixture = TestBed.createComponent(SudokuComponent);
 
     component = fixture.componentInstance;
-    component.sudoku = app.sudoku;
+    component.sudoku = game.sudoku;
     fixture.detectChanges();
 
     compiled = fixture.debugElement.nativeElement;

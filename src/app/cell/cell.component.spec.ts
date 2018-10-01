@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppComponent } from '../app.component';
+import { GameComponent } from '../game/game.component';
 import { CellComponent } from './cell.component';
 import { FormatTimePipe } from '../format-time.pipe';
 import { SudokuService } from '../sudoku.service';
@@ -24,18 +24,18 @@ describe('CellComponent', () => {
   }));
 
   beforeEach(() => {
-    const app = new AppComponent(new SudokuService(), new MatDialog());
-    app.setDifficulty('insane');
+    const game = new GameComponent(new SudokuService(), new MatDialog());
+    game.setDifficulty('insane');
     fixture = TestBed.createComponent(CellComponent);
     component = fixture.componentInstance;
-    component.sudoku = app.sudoku;
+    component.sudoku = game.sudoku;
 
     rowIndex = Math.floor(Math.random() * (component.sudoku.length -1));
     colIndex = Math.floor(Math.random() * (component.sudoku.length - 1));
     cellIndex = rowIndex * 9 + colIndex;
     squareIndex = Math.floor(rowIndex / 3) * 3 + Math.floor(colIndex / 3);
 
-    component.activeField = app.sudoku[rowIndex][colIndex];
+    component.activeField = game.sudoku[rowIndex][colIndex];
     fixture.detectChanges();
 
     compiled = fixture.debugElement.nativeElement;
