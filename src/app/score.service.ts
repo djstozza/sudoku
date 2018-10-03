@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable }   from 'rxjs';
+import { Score } from './score.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class ScoreService {
     return this.http.post('/api/scores', score);
   }
 
-  fetchScores() {
-    return this.http.get('/api/scores');
+  fetchScores(): Observable<Score[]> {
+    return this.http.get<Score[]>('/api/scores');
   }
 }

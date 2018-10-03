@@ -13,7 +13,7 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSnackBarModule
+  MatSnackBarModule, MatTableModule, MatPaginatorModule, MatSortModule
 } from '@angular/material';
 import { FormatTimePipe } from './format-time.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -21,6 +21,7 @@ import { environment } from '../environments/environment';
 import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
 import { GameComponent } from './game/game.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ScoreTableComponent } from './score-table/score-table.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AppRoutingModule } from './app-routing.module';
     CellComponent,
     FormatTimePipe,
     CompletionDialogComponent,
-    GameComponent
+    GameComponent,
+    ScoreTableComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,10 @@ import { AppRoutingModule } from './app-routing.module';
     ReactiveFormsModule,
     HttpClientModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
-    AppRoutingModule
+    AppRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

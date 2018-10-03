@@ -23,7 +23,7 @@ export class CompletionDialogComponent {
     public snackBar: MatSnackBar,
     private scoreService: ScoreService,
     private fb: FormBuilder,
-    // private router: Router
+    private router: Router
   ) {
     this.time = data.time;
     this.difficulty = data.difficulty;
@@ -36,6 +36,7 @@ export class CompletionDialogComponent {
   createScore(name, difficulty, time) {
     this.scoreService.createScore(name, difficulty, time).subscribe((data) => {
       this.snackBar.open(data['score'], 'Close', { duration: 2500 });
+      this.router.navigate(['/scores']);
     });
   }
 }
