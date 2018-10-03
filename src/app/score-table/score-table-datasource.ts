@@ -11,11 +11,9 @@ import { Score } from '../score.model';
  * (including sorting, pagination, and filtering).
  */
 export class ScoreTableDataSource extends DataSource<Score> {
-  constructor(private data: Score[], private paginator: MatPaginator, private sort: MatSort) {
+  constructor(public data: Score[], private paginator: MatPaginator, private sort: MatSort) {
     super();
   }
-
-
 
   /**
    * Connect this data source to the table. The table will only update when
@@ -67,7 +65,8 @@ export class ScoreTableDataSource extends DataSource<Score> {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
         case 'name': return compare(a.name, b.name, isAsc);
-        case 'difficulty': return compare(+a.name, +b.name, isAsc);
+        case 'difficulty': return compare(a.name, b.name, isAsc);
+        case 'position': return compare(+a.time, +b.time, isAsc);
         case 'time': return compare(+a.time, +b.time, isAsc);
         default: return 0;
       }

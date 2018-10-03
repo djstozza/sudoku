@@ -12,15 +12,23 @@ export class ScoreTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: ScoreTableDataSource;
+  timeArr: Number[];
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['name', 'difficulty', 'time'];
+  displayedColumns = ['position', 'name', 'difficulty', 'time'];
 
   constructor(private scoreService: ScoreService) { }
 
   ngOnInit() {
     this.scoreService.fetchScores().subscribe(
-      data => this.dataSource = new ScoreTableDataSource(data, this.paginator, this.sort)
+      (data) => {
+        this.dataSource = new ScoreTableDataSource(data, this.paginator, this.sort);
+        this.timeArr = data.map(d => d.time).sort((a, b) => this.compare(a, b));
+      }
     );
+  }
+
+  private compare(a, b): number {
+    return a - b
   }
 }
