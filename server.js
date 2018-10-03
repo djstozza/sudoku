@@ -24,7 +24,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', express.static(path.join(__dirname, 'dist/sudoku'))); // angular project
+app.use('/', express.static(path.join(__dirname, 'dist/sudoku')));
+app.use('/scores', express.static(path.join(__dirname, 'dist/sudoku')));  // angular project
 app.use('/api', score);
 
 const port = process.env.PORT || 3000;

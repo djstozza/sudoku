@@ -23,12 +23,8 @@ export class ScoreTableComponent implements OnInit {
     this.scoreService.fetchScores().subscribe(
       (data) => {
         this.dataSource = new ScoreTableDataSource(data, this.paginator, this.sort);
-        this.timeArr = data.map(d => d.time).sort((a, b) => this.compare(a, b));
+        this.timeArr = data.map(d => d.time).sort((a, b) => +a - +b);
       }
     );
-  }
-
-  private compare(a, b): number {
-    return a - b
   }
 }
