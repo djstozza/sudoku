@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
-import { ScoreTableDataSource } from './score-table-datasource';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ScoreService } from '../score.service';
+import { Score } from '../score.model';
 
 @Component({
   selector: 'app-score-table',
@@ -11,7 +11,7 @@ import { ScoreService } from '../score.service';
 export class ScoreTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: ScoreTableDataSource;
+  dataSource = new MatTableDataSource<Score>();
   timeArr: Number[];
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
@@ -22,9 +22,20 @@ export class ScoreTableComponent implements OnInit {
   ngOnInit() {
     this.scoreService.fetchScores().subscribe(
       (data) => {
-        this.dataSource = new ScoreTableDataSource(data, this.paginator, this.sort);
+        this.dataSource = new MatTableDataSource<Score>(data);
+
         this.timeArr = data.map(d => d.time).sort((a, b) => +a - +b);
+
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
+        this.dataSource.filterPredicate = ((data: Score, filter: string) => data.name === filter);
       }
     );
+  }
+
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue;
   }
 }

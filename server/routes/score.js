@@ -17,7 +17,7 @@ router.route('/scores').post((req, res) => {
 router.route('/scores').get((req, res) => {
   Score.find((err, issues) => {
     if (err) {
-      console.log(err);
+      res.json(err);
     } else {
       res.json(issues);
     }

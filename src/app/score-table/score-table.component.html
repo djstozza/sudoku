@@ -1,15 +1,19 @@
 <h3>Times</h3>
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
 <div class="mat-elevation-z8">
   <table
     mat-table
     #table
     [dataSource]="dataSource"
     matSort aria-label="Elements"
-    matSortActive="position"
+    matSortActive="time"
     matSortDirection="asc">
 
     <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
+      <th mat-header-cell *matHeaderCellDef>Position</th>
       <td mat-cell *matCellDef="let row">{{timeArr.indexOf(row.time) + 1}}</td>
     </ng-container>
 
@@ -19,7 +23,7 @@
     </ng-container>
 
     <ng-container matColumnDef="difficulty">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Difficulty</th>
+      <th mat-header-cell *matHeaderCellDef>Difficulty</th>
       <td mat-cell *matCellDef="let row">{{row.difficulty}}</td>
     </ng-container>
 
