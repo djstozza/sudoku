@@ -13,7 +13,12 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSnackBarModule, MatTableModule, MatPaginatorModule, MatSortModule
+  MatSnackBarModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatOptionModule,
+  MatSelectModule,
 } from '@angular/material';
 import { FormatTimePipe } from './format-time.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -22,6 +27,7 @@ import { CompletionDialogComponent } from './completion-dialog/completion-dialog
 import { GameComponent } from './game/game.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ScoreTableComponent } from './score-table/score-table.component';
+import { DifficultySelectComponent } from './difficulty-select/difficulty-select.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +37,8 @@ import { ScoreTableComponent } from './score-table/score-table.component';
     FormatTimePipe,
     CompletionDialogComponent,
     GameComponent,
-    ScoreTableComponent
+    ScoreTableComponent,
+    DifficultySelectComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +49,8 @@ import { ScoreTableComponent } from './score-table/score-table.component';
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
+    MatOptionModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -49,7 +58,7 @@ import { ScoreTableComponent } from './score-table/score-table.component';
     AppRoutingModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
