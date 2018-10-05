@@ -129,17 +129,18 @@ export class SudokuComponent implements OnChanges {
       field.notes = field.notes ? field.notes.filter(n => n !== this.activeField.value) : [];
     };
 
-    const inputs = JSON.parse(JSON.stringify(this.sudoku)).flat();
+    const field = this.activeField;
 
-    inputs.forEach(cell => {
-      const field = this.activeField;
-      const removable = (
-        cell.rowIndex === field.rowIndex || cell.colIndex === field.colIndex || cell.squareIndex === field.squareIndex
-      );
+    this.sudoku.forEach((row) => {
+      row.forEach((cell) => {
+        const removable = (
+          cell.rowIndex === field.rowIndex || cell.colIndex === field.colIndex || cell.squareIndex === field.squareIndex
+        );
 
-      if (removable) {
-        removeNote(cell);
-      }
+        if (removable) {
+          removeNote(cell);
+        }
+      });
     });
   }
 

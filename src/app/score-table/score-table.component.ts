@@ -25,27 +25,31 @@ export class ScoreTableComponent implements OnInit {
 
   constructor(private scoreService: ScoreService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.scoreService.fetchScores().subscribe(
       (data) => {
         this.dataSource = new MatTableDataSource<Score>(data);
-
-        this.timeArr = data.map(d => d.time).sort((a, b) => +a - +b);
 
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
 
         this.dataSource.filterPredicate = ((data: Score, filter: string) => data.difficulty === filter);
+        this.sortTimes();
       }
     );
   }
 
-  onSetDifficulty(difficulty) {
+  onSetDifficulty(difficulty): void {
     this.difficulty = difficulty;
     this.applyFilter(this.difficulty.name);
   }
 
-  applyFilter(filterValue: string) {
+  applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue;
+    this.sortTimes();
+  }
+
+  sortTimes(): void {
+    this.timeArr =  this.dataSource.filteredData.map(d => d.time).sort((a, b) => +a - +b);
   }
 }
