@@ -1,12 +1,5 @@
-<div class="button-container">
-  <ng-container *ngFor="let difficulty of difficultiesArr">
-    <button mat-raised-button mat-stroked-button class="difficulty-button" (click)="setDifficulty(difficulty)">
-      {{ difficultyText(difficulty) }}
-    </button>
-  </ng-container>
-</div>
-
 <div class="sudoku-container">
+  <app-difficulty-select (difficultySetter)="onSetDifficulty($event)"></app-difficulty-select>
   <div *ngIf="!paused">
     <app-sudoku [sudoku]="sudoku" (finish)="onGameFinished()"></app-sudoku>
   </div>

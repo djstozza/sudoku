@@ -125,8 +125,6 @@ describe('GameComponent', () => {
 
       expect(cell.textContent).toEqual(`${input.value}`);
     }
-
-    expect(inputs.filter(f => typeof(f.value) === 'number').length).toBe(component.difficultiesHash[difficulty]);
   });
 
   it('sets the difficulty to moderate if invalid', () => {

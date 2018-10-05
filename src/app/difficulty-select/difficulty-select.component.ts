@@ -10,7 +10,7 @@ import { Difficulty } from '../difficulty.model';
 export class DifficultySelectComponent {
   @Output() difficultySetter = new EventEmitter<Difficulty>();
 
-  private difficulty: Difficulty;
+  difficulty: Difficulty;
 
   difficulties: Difficulty[] = [
     { name: 'easy', value: 46 },
@@ -22,7 +22,7 @@ export class DifficultySelectComponent {
 
   setDifficulty(difficulty) {
     this.difficulty = difficulty;
-    console.log(this.difficulty)
+
     this.difficultySetter.emit(this.difficulty);
   }
 }

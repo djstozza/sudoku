@@ -60,7 +60,7 @@ import { DifficultySelectComponent } from './difficulty-select/difficulty-select
     MatPaginatorModule,
     MatSortModule,
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, DifficultySelectComponent],
   bootstrap: [AppComponent],
   entryComponents: [CompletionDialogComponent],
 })

@@ -4,6 +4,8 @@ import { Sudoku } from '../sudoku/sudoku';
 import { Subscription, timer } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { CompletionDialogComponent } from '../completion-dialog/completion-dialog.component';
+import { Difficulty } from '../difficulty.model';
+import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
 
 @Component({
   selector: 'app-game',
@@ -14,22 +16,18 @@ export class GameComponent implements OnInit {
   sudoku: Sudoku;
   elapsedTime: number;
   paused = false;
-  private _difficulty: string = 'moderate';
 
   private timerSubscription: Subscription;
+  private _difficulty: Difficulty;
 
-  private _difficultiesHash: any = {
-    easy: 80,
-    moderate: 36,
-    hard: 29,
-    expert: 23,
-    insane: 17
-  }
+  constructor(
+    private _sudokuService: SudokuService,
+    private dialog: MatDialog,
+    private difficultySelect: DifficultySelectComponent
+  ) {
+    this._difficulty = this.difficultySelect.difficulties[1];
 
-  private _difficultiesArr: string[] = Object.keys(this._difficultiesHash);
-
-  constructor(private _sudokuService: SudokuService, private dialog: MatDialog) {
-  this.generate();
+    this.generate();
   }
 
   ngOnInit(): void {
@@ -42,16 +40,6 @@ export class GameComponent implements OnInit {
     if (event.key === 'p' && this.elapsedTime) {
       this.pauseTimer();
     }
-  }
-
-  public setDifficulty(difficulty): void {
-    if (this._difficultiesArr.indexOf(difficulty) > -1) {
-      this._difficulty = difficulty;
-    } else {
-      this._difficulty = 'moderate';
-    }
-
-    this.generate();
   }
 
   public difficultyText(difficulty): string {
@@ -68,9 +56,14 @@ export class GameComponent implements OnInit {
     }
   }
 
+  onSetDifficulty(difficulty) {
+    this._difficulty = difficulty;
+    this.generate();
+  }
+
   private generate(): void {
     const solution = this._sudokuService.makePuzzle();
-    const puzzle = this._sudokuService.pluck(solution, this._difficultiesHash[this._difficulty]);
+    const puzzle = this._sudokuService.pluck(solution, this._difficulty.value);
 
     this.sudoku = solution.map((row, rowIndex) => row.map((number, colIndex) => {
       const value = puzzle[rowIndex][colIndex];
@@ -110,7 +103,7 @@ export class GameComponent implements OnInit {
         CompletionDialogComponent,
         {
           disableClose: true,
-          data: { time: this.elapsedTime, difficulty: this.difficulty },
+          data: { time: this.elapsedTime, difficulty: this._difficulty.name },
         }
       )
       .afterClosed()
@@ -118,6 +111,4 @@ export class GameComponent implements OnInit {
   }
 
   public get difficulty() { return this._difficulty }
-  public get difficultiesHash() { return this._difficultiesHash }
-  public get difficultiesArr() { return this._difficultiesArr }
 }
