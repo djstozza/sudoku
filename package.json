@@ -26,6 +26,7 @@
     "@angular/platform-browser-dynamic": "^6.1.9",
     "@angular/router": "^6.1.0",
     "@angular/service-worker": "^6.1.9",
+    "compression": "^1.7.3",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.5.4",
     "dotenv": "^6.0.0",
