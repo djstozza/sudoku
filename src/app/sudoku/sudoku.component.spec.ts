@@ -4,7 +4,14 @@ import { SudokuComponent } from './sudoku.component';
 import { CellComponent } from '../cell/cell.component';
 import { FormatTimePipe } from '../format-time.pipe';
 import { SudokuService } from '../sudoku.service';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import {
+  MatDialog,
+  MatButtonModule,
+  MatIconModule,
+  MatOptionModule,
+  MatSelectModule
+ } from '@angular/material';
+import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
 
 
 describe('SudokuComponent', () => {
@@ -21,18 +28,22 @@ describe('SudokuComponent', () => {
       declarations: [
         SudokuComponent,
         CellComponent,
+        DifficultySelectComponent
       ],
       imports: [
         MatButtonModule,
         MatIconModule,
+        MatOptionModule,
+        MatSelectModule,
       ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    const game = new GameComponent(new SudokuService());
-    game.setDifficulty('insane');
+    const game = new GameComponent(new SudokuService(), new MatDialog(), new DifficultySelectComponent());
+    const difficulty = new DifficultySelectComponent().difficulties.pop();
+    game.onSetDifficulty(difficulty);
 
     fixture = TestBed.createComponent(SudokuComponent);
 

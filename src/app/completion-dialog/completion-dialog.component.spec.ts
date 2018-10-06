@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CompletionDialogComponent', () => {
   let component: CompletionDialogComponent;
@@ -22,11 +23,6 @@ describe('CompletionDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} },
-        HttpClient,
-        MatSnackBar
-      ],
       declarations: [CompletionDialogComponent, FormatTimePipe],
       imports: [
         MatDialogModule,
@@ -38,8 +34,14 @@ describe('CompletionDialogComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatInputModule,
-        BrowserAnimationsModule
-      ]
+        BrowserAnimationsModule,
+        RouterTestingModule
+      ],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        HttpClient,
+        MatSnackBar
+      ],
     })
     .compileComponents();
   }));

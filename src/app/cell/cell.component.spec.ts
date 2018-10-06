@@ -4,6 +4,7 @@ import { CellComponent } from './cell.component';
 import { FormatTimePipe } from '../format-time.pipe';
 import { SudokuService } from '../sudoku.service';
 import { MatDialog } from '@angular/material';
+import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
 
 describe('CellComponent', () => {
   let component: CellComponent;
@@ -24,8 +25,9 @@ describe('CellComponent', () => {
   }));
 
   beforeEach(() => {
-    const game = new GameComponent(new SudokuService(), new MatDialog());
-    game.setDifficulty('insane');
+    const game = new GameComponent(new SudokuService(), new MatDialog(), new DifficultySelectComponent());
+    const difficulty = new DifficultySelectComponent().difficulties.pop();
+    game.onSetDifficulty(difficulty)
     fixture = TestBed.createComponent(CellComponent);
     component = fixture.componentInstance;
     component.sudoku = game.sudoku;

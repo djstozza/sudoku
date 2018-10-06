@@ -1,15 +1,32 @@
 import { TestBed, async } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
+
 import { AppComponent } from './app.component';
 import { SudokuComponent } from './sudoku/sudoku.component';
 import { CellComponent } from './cell/cell.component';
-import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatIconModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-import { MatDialog } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSnackBarModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatOptionModule,
+  MatSelectModule,
+} from '@angular/material';
 import { FormatTimePipe } from './format-time.pipe';
-import { AppRoutingModule } from './app-routing.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
 import { GameComponent } from './game/game.component';
-import { APP_BASE_HREF } from '@angular/common';
+import { AppRoutingModule } from './app-routing.module';
+import { ScoreTableComponent } from './score-table/score-table.component';
+import { DifficultySelectComponent } from './difficulty-select/difficulty-select.component';
 
 describe('AppComponent', () => {
   let fixture: any = null;
@@ -23,16 +40,27 @@ describe('AppComponent', () => {
         SudokuComponent,
         CellComponent,
         FormatTimePipe,
+        CompletionDialogComponent,
         GameComponent,
-        CompletionDialogComponent
+        ScoreTableComponent,
+        DifficultySelectComponent
       ],
       imports: [
-        AppRoutingModule,
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
         MatFormFieldModule,
+        MatInputModule,
+        MatSnackBarModule,
+        MatOptionModule,
+        MatSelectModule,
+        FormsModule,
         ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
       ],
       providers: [{provide: APP_BASE_HREF, useValue : '/' }]
     }).compileComponents();

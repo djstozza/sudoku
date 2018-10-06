@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatOptionModule, MatSelectModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DifficultySelectComponent } from './difficulty-select.component';
 
@@ -8,7 +10,12 @@ describe('DifficultySelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DifficultySelectComponent ]
+      declarations: [DifficultySelectComponent],
+      imports: [
+        BrowserAnimationsModule,
+        MatOptionModule,
+        MatSelectModule,
+      ]
     })
     .compileComponents();
   }));

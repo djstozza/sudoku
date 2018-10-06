@@ -4,11 +4,22 @@ import { SudokuComponent } from '../sudoku/sudoku.component';
 import { CellComponent } from '../cell/cell.component';
 import { CompletionDialogComponent } from '../completion-dialog/completion-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatIconModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatOptionModule,
+  MatSelectModule,
+
+} from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { FormatTimePipe } from '../format-time.pipe';
 import { AppRoutingModule } from '../app-routing.module';
 import { GameComponent } from './game.component';
+import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('GameComponent', () => {
   let component: GameComponent;
@@ -24,15 +35,20 @@ describe('GameComponent', () => {
         CellComponent,
         FormatTimePipe,
         GameComponent,
-        CompletionDialogComponent
+        CompletionDialogComponent,
+        DifficultySelectComponent
       ],
       imports: [
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
+        MatOptionModule,
+        MatSelectModule,
         MatFormFieldModule,
         ReactiveFormsModule,
-      ]
+        BrowserAnimationsModule
+      ],
+      providers: [DifficultySelectComponent]
     })
     .compileComponents();
   }));
@@ -48,25 +64,12 @@ describe('GameComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render difficulty buttons', () => {
-    const difficultyButtons = compiled.querySelectorAll('.difficulty-button');
-    const difficultiesArr = component.difficultiesArr;
-
-    for (let index in difficultiesArr) {
-      const difficulty = difficultiesArr[index];
-      const text = component.difficultyText(difficulty);
-      const button = difficultyButtons[index];
-
-      expect(button.textContent).toContain(text);
-    }
-  });
-
   it('should render the sudoku board', () => {
     const defaultDifficulty = 'moderate';
     const cells = compiled.querySelectorAll('.sudoku-container .cell');
     const values = compiled.querySelectorAll('.sudoku-container .cell .value');
 
-    expect(component.difficulty).toEqual(defaultDifficulty);
+    expect(component.difficulty.name).toEqual(defaultDifficulty);
 
     for (let rowIndex in component.sudoku) {
       for (let colIndex in component.sudoku[rowIndex]) {
@@ -109,9 +112,9 @@ describe('GameComponent', () => {
   });
 
   it('sets the difficulty of the sudoku board', () => {
-    const difficulty = 'insane';
+    const difficulty = new DifficultySelectComponent().difficulties.pop();
 
-    component.setDifficulty(difficulty);
+    component.onSetDifficulty(difficulty);
     fixture.detectChanges();
 
     expect(component.difficulty).toEqual(difficulty);
@@ -125,16 +128,6 @@ describe('GameComponent', () => {
 
       expect(cell.textContent).toEqual(`${input.value}`);
     }
-  });
-
-  it('sets the difficulty to moderate if invalid', () => {
-    const defaultDifficulty = 'moderate';
-
-    component.setDifficulty('foo');
-    fixture.detectChanges();
-
-    expect(component.difficulty).toEqual(defaultDifficulty);
-
   });
 
   it('shows the pause button if more than 5 seconds has elapsed', () => {
