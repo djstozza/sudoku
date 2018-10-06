@@ -64,7 +64,7 @@ export class SudokuComponent implements OnChanges {
   onKeyDown(event: KeyboardEvent) {
     const number = parseInt(event.key, 10);
 
-    if (!this.activeField || isNaN(number) || number < 1 || number > 9) {
+    if (!this.activeField || isNaN(number) || number < 1 || number > 9 || this.numberLimitReached(number)) {
       return;
     }
 
@@ -144,10 +144,13 @@ export class SudokuComponent implements OnChanges {
     });
   }
 
+  private numberLimitReached(number): boolean {
+    return this.sudoku.reduce((sum, row) => sum + row.filter(f => f.value === number).length, 0) >= 9;
+  }
+
   private checkNumbers(): void {
-    const countNumber = i => this.sudoku.reduce((sum, row) => sum + row.filter(f => f.value === i).length, 0);
     this.numberButtons.forEach(button => {
-      button.disabled = countNumber(button.number) >= 9;
+      button.disabled = this.numberLimitReached(button.number);
     });
   }
 
