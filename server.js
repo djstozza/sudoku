@@ -12,9 +12,9 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
 // mongoose setup
-const MONGOURI = process.env.MONGOURI;
+const MONGODB_URI = process.env.MONGODB_URI;
 
-mongoose.connect(MONGOURI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 let db = mongoose.connection;
 
