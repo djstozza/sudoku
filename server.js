@@ -4,9 +4,27 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const helmet = require('helmet');
 const score = require('./server/routes/score');
+const minifyHTML = require('express-minify-html');
+const compression = require('compression');
 
 const app = express();
+
 app.use(helmet());
+
+app.use(minifyHTML({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+      removeComments: true,
+      collapseWhitespace: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeEmptyAttributes: true,
+      minifyJS: true
+    }
+}));
+
+app.use(compression());
 
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
