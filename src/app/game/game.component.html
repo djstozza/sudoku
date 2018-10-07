@@ -1,4 +1,4 @@
-<div class="sudoku-container">
+<div class="sudoku-container" fxLayout="column">
   <app-difficulty-select (difficultySetter)="onSetDifficulty($event)"></app-difficulty-select>
   <div *ngIf="!paused">
     <app-sudoku [sudoku]="sudoku" (finish)="onGameFinished()"></app-sudoku>
@@ -8,8 +8,8 @@
     <h1><mat-icon>pause</mat-icon> Paused</h1>
   </div>
 
-  <div *ngIf="elapsedTime">
-    <span class="time">{{ elapsedTime | formatTime }}</span>
+  <div *ngIf="elapsedTime" fxLayout="row" fxLayoutAlign="center center">
+    <div mat-raised-button class="time">{{ elapsedTime | formatTime }}  </div>
     <button mat-raised-button class="pause-button" (click)="pauseTimer()">
       <mat-icon>{{ paused ? 'play_arrow' : 'pause' }}</mat-icon>
       {{ paused ? 'Resume' : 'Pause' }}

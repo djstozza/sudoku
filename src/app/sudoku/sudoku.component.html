@@ -1,20 +1,28 @@
 <app-cell [sudoku]="sudoku" [(activeField)]="activeField"></app-cell>
 
-<div class="options">
-  <button class="erase" mat-raised-button (click)="erase()">
-    <mat-icon>clear</mat-icon>
-    Erase
-  </button>
-  <button class="notes" mat-raised-button (click)="noteMode = !noteMode" [color]="noteMode ? 'primary' : undefined">
-    <mat-icon>note</mat-icon>
-    Notes
-  </button>
+<div class="options" fxLayout="row">
+  <div>
+    <button class="erase" mat-raised-button (click)="erase()">
+      <mat-icon>clear</mat-icon>
+      Erase
+    </button>
+  </div>
+
+  <div fxFlex="51%"></div>
+
+  <div>
+    <button class="notes" mat-raised-button (click)="noteMode = !noteMode" [color]="noteMode ? 'primary' : undefined">
+      <mat-icon>note</mat-icon>
+      Notes
+    </button>
+  </div>
 </div>
 
 <div class="controls">
   <button *ngFor="let button of numberButtons"
-          mat-stroked-button
+          mat-mini-fab
           color="primary"
+          class="number-button"
           [disabled]="button.disabled"
           (click)="insertNumber(button.number)">
     {{ button.number }}

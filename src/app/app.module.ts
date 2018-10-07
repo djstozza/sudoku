@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { AppComponent } from './app.component';
 import { SudokuComponent } from './sudoku/sudoku.component';
 import { CellComponent } from './cell/cell.component';
@@ -43,6 +43,7 @@ import { DifficultySelectComponent } from './difficulty-select/difficulty-select
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
