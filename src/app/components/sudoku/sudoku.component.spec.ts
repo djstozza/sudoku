@@ -2,8 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { GameComponent } from '../game/game.component';
 import { SudokuComponent } from './sudoku.component';
 import { CellComponent } from '../cell/cell.component';
-import { FormatTimePipe } from '../format-time.pipe';
-import { SudokuService } from '../sudoku.service';
+import { FormatTimePipe } from '../../pipes/format-time.pipe';
+import { SudokuService } from '../../services/sudoku.service';
 import {
   MatDialog,
   MatButtonModule,

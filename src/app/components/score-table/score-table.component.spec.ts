@@ -6,7 +6,7 @@ import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
 import { ScoreTableComponent } from './score-table.component';
 import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormatTimePipe } from '../format-time.pipe';
+import { FormatTimePipe } from '../../pipes/format-time.pipe';
 import {
   MatTableModule,
   MatPaginatorModule,

@@ -64,6 +64,7 @@ export class SudokuService {
       if (!(rowPeer.x === x && rowPeer.y === y) && puzzle[rowPeer.x][rowPeer.y] === value) return false;
       if (!(columnPeer.x === x && columnPeer.y === y) && puzzle[columnPeer.x, columnPeer.y] === value) return false;
       if (!(SquarePeer.x === x && SquarePeer.y === y) && puzzle[SquarePeer.x][SquarePeer.y] === value) return false;
+      if (!this.isPeer(x, y)) return false;
     }
     return true;
   }

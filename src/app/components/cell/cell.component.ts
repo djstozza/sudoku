@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Sudoku, SudokuField } from '../sudoku/sudoku';
+import { Sudoku, SudokuField } from '../../models/sudoku.model';
 
 @Component({
   selector: 'app-cell',

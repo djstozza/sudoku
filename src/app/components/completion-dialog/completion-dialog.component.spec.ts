@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompletionDialogComponent } from './completion-dialog.component';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { FormatTimePipe } from '../format-time.pipe';
+import { FormatTimePipe } from '../../pipes/format-time.pipe';
 import {
   MatButtonModule,
   MatIconModule,

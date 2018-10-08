@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { ScoreService } from '../score.service';
-import { Score } from '../score.model';
+import { ScoreService } from '../../services/score.service';
+import { Score } from '../../models/score.model';
 import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
-import { Difficulty } from '../difficulty.model';
+import { Difficulty } from '../../models/difficulty.model';
 
 @Component({
   selector: 'app-score-table',

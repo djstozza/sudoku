@@ -1,10 +1,10 @@
 import { Component, HostListener, OnInit, Input, Output } from '@angular/core';
-import { SudokuService } from '../sudoku.service';
-import { Sudoku } from '../sudoku/sudoku';
+import { SudokuService } from '../../services/sudoku.service';
+import { Sudoku } from '../../models/sudoku.model';
 import { Subscription, timer } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { CompletionDialogComponent } from '../completion-dialog/completion-dialog.component';
-import { Difficulty } from '../difficulty.model';
+import { Difficulty } from '../../models/difficulty.model';
 import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
 
 @Component({

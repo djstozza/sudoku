@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output  } from '@angular/core';
-import { Difficulty } from '../difficulty.model';
+import { Difficulty } from '../../models/difficulty.model';
 
 @Component({
   selector: 'app-difficulty-select',

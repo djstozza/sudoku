@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { ScoreService } from '../score.service';
+import { ScoreService } from '../../services/score.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({

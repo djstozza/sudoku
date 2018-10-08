@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { Sudoku, SudokuField } from './sudoku';
-import { NumberButton } from './number-button';
+import { Sudoku, SudokuField } from '../../models/sudoku.model';
+import { NumberButton } from '../../models/number-button.model';
 
 @Component({
   selector: 'app-sudoku',

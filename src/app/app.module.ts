@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { AppComponent } from './app.component';
-import { SudokuComponent } from './sudoku/sudoku.component';
-import { CellComponent } from './cell/cell.component';
+import { AppComponent } from './components/app.component';
+import { SudokuComponent } from './components/sudoku/sudoku.component';
+import { CellComponent } from './components/cell/cell.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,

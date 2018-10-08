@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppComponent } from '../app.component';
+import { AppComponent } from '../../app.component';
 import { SudokuComponent } from '../sudoku/sudoku.component';
 import { CellComponent } from '../cell/cell.component';
 import { CompletionDialogComponent } from '../completion-dialog/completion-dialog.component';
@@ -15,8 +15,8 @@ import {
 
 } from '@angular/material';
 import { MatDialog } from '@angular/material';
-import { FormatTimePipe } from '../format-time.pipe';
-import { AppRoutingModule } from '../app-routing.module';
+import { FormatTimePipe } from '../../pipes/format-time.pipe';
+import { AppRoutingModule } from '../../app-routing.module';
 import { GameComponent } from './game.component';
 import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
