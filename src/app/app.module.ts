@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { AppComponent } from './components/app.component';
+import { AppComponent } from './app.component';
 import { SudokuComponent } from './components/sudoku/sudoku.component';
 import { CellComponent } from './components/cell/cell.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,14 +20,14 @@ import {
   MatOptionModule,
   MatSelectModule,
 } from '@angular/material';
-import { FormatTimePipe } from './format-time.pipe';
+import { FormatTimePipe } from './pipes/format-time.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { CompletionDialogComponent } from './completion-dialog/completion-dialog.component';
-import { GameComponent } from './game/game.component';
+import { CompletionDialogComponent } from './components/completion-dialog/completion-dialog.component';
+import { GameComponent } from './components/game/game.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ScoreTableComponent } from './score-table/score-table.component';
-import { DifficultySelectComponent } from './difficulty-select/difficulty-select.component';
+import { ScoreTableComponent } from './components/score-table/score-table.component';
+import { DifficultySelectComponent } from './components/difficulty-select/difficulty-select.component';
 
 @NgModule({
   declarations: [
