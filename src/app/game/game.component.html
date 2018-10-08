@@ -1,5 +1,10 @@
-<div class="sudoku-container" fxLayout="column">
-  <app-difficulty-select (difficultySetter)="onSetDifficulty($event)"></app-difficulty-select>
+<div class="sudoku-container">
+  <div fxLayout fxLayoutAlign="left center">
+    <app-difficulty-select (difficultySetter)="onSetDifficulty($event)"></app-difficulty-select>
+    <div fxFlex="68%"></div>
+
+    <button mat-raised-button routerLink="/scores">Scores</button>
+  </div>
   <div *ngIf="!paused">
     <app-sudoku [sudoku]="sudoku" (finish)="onGameFinished()"></app-sudoku>
   </div>

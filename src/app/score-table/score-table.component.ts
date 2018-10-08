@@ -8,7 +8,7 @@ import { Difficulty } from '../difficulty.model';
 @Component({
   selector: 'app-score-table',
   templateUrl: './score-table.component.html',
-  styleUrls: ['./score-table.component.css']
+  styleUrls: ['./score-table.component.scss']
 })
 export class ScoreTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -50,6 +50,6 @@ export class ScoreTableComponent implements OnInit {
   }
 
   sortTimes(): void {
-    this.timeArr =  this.dataSource.filteredData.map(d => d.time).sort((a, b) => +a - +b);
+    this.timeArr = this.dataSource.filteredData.map(d => d.time).sort((a, b) => +a - +b);
   }
 }
