@@ -13,14 +13,20 @@ import {
   MatSortModule,
   MatOptionModule,
   MatSelectModule,
+  MatTableDataSource
 } from '@angular/material';
-
+import { Score } from '../../models/score.model';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('ScoreTableComponent', () => {
   let component: ScoreTableComponent;
   let fixture: ComponentFixture<ScoreTableComponent>;
+  let scores: Score[] = [
+    { id: '1', name: 'foo', difficulty: 'easy', time: 1 },
+    { id: '2', name: 'bar', difficulty: 'easy', time: 2 }
+  ]
 
-  beforeEach(fakeAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         ScoreTableComponent,
@@ -35,24 +41,21 @@ describe('ScoreTableComponent', () => {
         MatSortModule,
         MatOptionModule,
         MatSelectModule,
+        FormsModule,
+        ReactiveFormsModule,
       ],
       providers: [
-        DifficultySelectComponent,
-        {
-          provide: HttpXhrBackend,
-          useClass: MockBackend
-        }
+        DifficultySelectComponent
       ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(ScoreTableComponent);
     component = fixture.componentInstance;
-    tick();
+    component.dataSource = new MatTableDataSource<Score>(scores);
+    component.sortTimes();
     fixture.detectChanges();
-    tick();
-    fixture.detectChanges();
-  }));
+  });
 
   it('should compile', () => {
     expect(component).toBeTruthy();

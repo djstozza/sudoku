@@ -4,8 +4,7 @@ import { Sudoku } from '../../models/sudoku.model';
 import { Subscription, timer } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { CompletionDialogComponent } from '../completion-dialog/completion-dialog.component';
-import { Difficulty } from '../../models/difficulty.model';
-import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
+import { Difficulty, difficulties } from '../../models/difficulty.model';
 
 @Component({
   selector: 'app-game',
@@ -19,13 +18,13 @@ export class GameComponent implements OnInit {
 
   private timerSubscription: Subscription;
   private _difficulty: Difficulty;
+  difficulties = difficulties;
 
   constructor(
     private _sudokuService: SudokuService,
     private dialog: MatDialog,
-    private difficultySelect: DifficultySelectComponent
   ) {
-    this._difficulty = this.difficultySelect.difficulties[1];
+    this._difficulty = this.difficulties[1]; // Moderate
 
     this.generate();
   }

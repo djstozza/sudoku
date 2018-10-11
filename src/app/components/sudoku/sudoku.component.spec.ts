@@ -12,6 +12,7 @@ import {
   MatSelectModule
  } from '@angular/material';
 import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 describe('SudokuComponent', () => {
@@ -35,15 +36,15 @@ describe('SudokuComponent', () => {
         MatIconModule,
         MatOptionModule,
         MatSelectModule,
+        FormsModule,
+        ReactiveFormsModule,
       ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    const game = new GameComponent(new SudokuService(), new MatDialog(), new DifficultySelectComponent());
-    const difficulty = new DifficultySelectComponent().difficulties.pop();
-    game.onSetDifficulty(difficulty);
+    const game = new GameComponent(new SudokuService(), new MatDialog(null, null, null, null, null, null, null));
 
     fixture = TestBed.createComponent(SudokuComponent);
 

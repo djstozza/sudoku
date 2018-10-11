@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output  } from '@angular/core';
-import { Difficulty } from '../../models/difficulty.model';
+import { Difficulty, difficulties } from '../../models/difficulty.model';
 
 @Component({
   selector: 'app-difficulty-select',
@@ -11,18 +11,12 @@ export class DifficultySelectComponent {
   @Output() difficultySetter = new EventEmitter<Difficulty>();
 
   difficulty: Difficulty;
+  difficulties = difficulties;
 
-  difficulties: Difficulty[] = [
-    { name: 'easy', value: 46 },
-    { name: 'moderate', value: 36 },
-    { name: 'hard', value: 29 },
-    { name: 'expert', value: 23 },
-    { name: 'insane', value: 17 }
-  ]
-
-  setDifficulty(difficulty) {
-    this.difficulty = difficulty;
-
+  setDifficulty() {
+    console.log('baz')
+    console.log(this.difficulty)
+    console.log('bar')
     this.difficultySetter.emit(this.difficulty);
   }
 }

@@ -19,6 +19,8 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { GameComponent } from './game.component';
 import { DifficultySelectComponent } from '../difficulty-select/difficulty-select.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { difficulties } from '../../models/difficulty.model';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('GameComponent', () => {
   let component: GameComponent;
@@ -45,9 +47,10 @@ describe('GameComponent', () => {
         MatSelectModule,
         MatFormFieldModule,
         ReactiveFormsModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule
       ],
-      providers: [DifficultySelectComponent]
     })
     .compileComponents();
   }));
@@ -55,6 +58,7 @@ describe('GameComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GameComponent);
     component = fixture.componentInstance;
+    component.difficulties = difficulties;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
   });

@@ -1,5 +1,8 @@
 <mat-form-field>
-  <mat-select placeholder="Difficulty" (selectionChange)="setDifficulty($event.value)">
+  <mat-select class="difficulty-select"
+              [(ngModel)]="difficulty"
+              placeholder="Difficulty"
+              (ngModelChange)="setDifficulty()">
     <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty">
       {{difficulty.name[0].toUpperCase() + difficulty.name.slice(1)}}
     </mat-option>
