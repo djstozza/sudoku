@@ -161,7 +161,10 @@ export class SudokuComponent implements OnChanges {
   }
 
   private get finished(): boolean {
-    return this.sudoku.every(row => row.every(field => field.value === field.answer));
+    const allAnswered = this.sudoku.every(row => row.every(field => field.value === field.answer));
+    const numberButtonsDisabled = this.numberButtons.every(button => button.disabled);
+    const noConflicts = JSON.parse(JSON.stringify(this.sudoku)).flat().every(cell => !cell.conflict);
+    return allAnswered || (numberButtonsDisabled && noConflicts);
   }
 
   private duplicatesPresent(cell): boolean {

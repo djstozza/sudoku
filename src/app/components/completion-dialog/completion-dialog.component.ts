@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-completion-dialog',
   templateUrl: './completion-dialog.component.html',
-  styleUrls: ['./completion-dialog.component.css']
+  styleUrls: ['./completion-dialog.component.scss']
 })
 export class CompletionDialogComponent {
   time: number;

@@ -14,9 +14,6 @@ export class DifficultySelectComponent {
   difficulties = difficulties;
 
   setDifficulty() {
-    console.log('baz')
-    console.log(this.difficulty)
-    console.log('bar')
     this.difficultySetter.emit(this.difficulty);
   }
 }

@@ -31,23 +31,19 @@ describe('DifficultySelectComponent', () => {
     compiled = fixture.debugElement.nativeElement;
     difficultySelect = compiled.querySelector('.mat-select');
     fixture.detectChanges();
-    spyOn(component, 'setDifficulty').and.callThrough();
-
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set the difficulty', () => {
-    difficultySelect.value = component.difficulties[0];
-    difficultySelect.dispatchEvent(new Event('ngModelChange'));
+  it('should emit the difficulty when difficulty setter is called', () => {
+    spyOn(component.difficultySetter, 'emit').and.stub();
+    const difficulty =  { name: 'easy', value: 46 }
+    component.difficulty = difficulty;
 
-    fixture.detectChanges();
+    component.setDifficulty();
 
-
-    fixture.whenStable().then(() => {
-      expect(component.setDifficulty).toHaveBeenCalled();
-    });
+    expect(component.difficultySetter.emit).toHaveBeenCalledWith(difficulty);
   });
 });

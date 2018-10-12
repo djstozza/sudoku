@@ -3,7 +3,6 @@ import { AppComponent } from '../../app.component';
 import { SudokuComponent } from '../sudoku/sudoku.component';
 import { CellComponent } from '../cell/cell.component';
 import { CompletionDialogComponent } from '../completion-dialog/completion-dialog.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatIconModule,
